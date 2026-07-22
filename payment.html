@@ -11,56 +11,95 @@
   * { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
   body { background: #0d1117; }
   input::placeholder { color: #6b7280; }
-  .card {
-    background: #11161d;
-    border: 1px solid #262e3a;
-  }
-  .tag {
-    font-size: 11px;
-    letter-spacing: 0.05em;
-  }
+  .tag { font-size: 11px; letter-spacing: 0.05em; }
   ::selection { background: #2f6feb44; }
   input[type="radio"], input[type="checkbox"] { accent-color: #58a6ff; }
 </style>
 </head>
-<body class="min-h-screen text-gray-200">
+<body class="text-gray-200 min-h-screen">
 
-  <div class="max-w-6xl mx-auto my-6 rounded-lg overflow-hidden card">
-
-    <!-- Header -->
-    <div class="flex items-center justify-between px-8 py-5 border-b border-[#262e3a]">
-      <div class="flex items-center gap-3">
-        <div class="bg-[#1f6feb] rounded w-10 h-10 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="5" width="20" height="14" rx="2"/>
-            <line x1="2" y1="10" x2="22" y2="10"/>
+  <!-- Nav -->
+  <header class="border-b border-[#262e3a] sticky top-0 bg-[#0d1117]/90 backdrop-blur z-20">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+      <div class="flex items-center gap-2">
+        <div class="bg-[#1f6feb] rounded w-8 h-8 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
           </svg>
         </div>
-        <div>
-          <div class="text-lg font-bold text-white leading-tight">PayLink<span class="text-[#58a6ff]">_</span></div>
-          <div class="tag text-gray-500">// paiement sécurisé en ligne</div>
-        </div>
+        <span class="font-bold text-white text-sm">PayLink<span class="text-[#58a6ff]">_</span></span>
       </div>
-      <div class="flex items-center gap-2 text-[#3fb950] text-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+      <nav class="hidden md:flex items-center gap-8 text-sm text-gray-400">
+        <a href="#" class="hover:text-white transition-colors">entreprise</a>
+        <a href="#" class="hover:text-white transition-colors">pme</a>
+        <a href="#" class="hover:text-white transition-colors">créateurs</a>
+        <a href="#" class="hover:text-white transition-colors">développeurs</a>
+        <a href="#" class="hover:text-white transition-colors">tarifs</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 text-[#3fb950] text-xs border border-[#1f6feb44] bg-[#1f6feb0d] rounded-full px-3 py-1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 1a5 5 0 00-5 5v2H4a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm3 7V6a3 3 0 10-6 0v2h6z" clip-rule="evenodd"/>
+          </svg>
+          paiement_sécurisé
+        </div>
+        <!-- mobile menu button -->
+        <button id="menu-btn" onclick="toggleMenu()" class="md:hidden w-9 h-9 flex items-center justify-center border border-[#262e3a] rounded text-gray-300" aria-label="Ouvrir le menu" aria-expanded="false">
+          <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile menu panel -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-[#262e3a] bg-[#0d1117] px-6 py-5">
+      <nav class="flex flex-col gap-1 text-sm">
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">entreprise</a>
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">pme</a>
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">créateurs</a>
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">développeurs</a>
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">tarifs</a>
+      </nav>
+      <div class="border-t border-[#262e3a] mt-4 pt-4 flex items-center gap-2 text-[#3fb950] text-xs px-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M10 1a5 5 0 00-5 5v2H4a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm3 7V6a3 3 0 10-6 0v2h6z" clip-rule="evenodd"/>
         </svg>
-        [ paiement_100%_securise: true ]
+        paiement_sécurisé
       </div>
     </div>
+  </header>
 
-    <!-- Amount summary -->
-    <div class="flex flex-col items-center pt-10 pb-8 px-4 border-b border-[#262e3a] bg-[#0d1117]">
-      <div class="tag text-gray-500 mb-2">$ initiate_payment --to</div>
-      <div class="text-2xl font-bold text-white mb-3">HEC MAROC <span class="text-gray-500">(600000463)</span></div>
-      <div class="text-5xl font-extrabold text-[#58a6ff] mb-5 tracking-tight">300<span class="text-gray-600">,</span>00<span class="text-2xl text-gray-500 ml-2">MAD</span></div>
-      <div class="border border-[#2f6feb66] bg-[#1f6feb1a] text-[#58a6ff] tag rounded px-4 py-2 font-medium">
-        ref: ORDER-23281VX7I19377
-      </div>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('menu-btn');
+      const iconOpen = document.getElementById('icon-open');
+      const iconClose = document.getElementById('icon-close');
+      const isHidden = menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    }
+  </script>
+
+  <!-- Amount summary -->
+  <div class="flex flex-col items-center pt-10 sm:pt-14 pb-8 px-4 border-b border-[#262e3a] bg-[#0d1117] text-center">
+    <div class="tag text-gray-500 mb-2">$ initiate_payment --to</div>
+    <div class="text-xl sm:text-2xl font-bold text-white mb-3">HEC MAROC <span class="text-gray-500">(600000463)</span></div>
+    <div class="text-4xl sm:text-5xl font-extrabold text-[#58a6ff] mb-5 tracking-tight">300<span class="text-gray-600">,</span>00<span class="text-xl sm:text-2xl text-gray-500 ml-2">MAD</span></div>
+    <div class="border border-[#2f6feb66] bg-[#1f6feb1a] text-[#58a6ff] tag rounded px-4 py-2 font-medium break-all max-w-full">
+      ref: ORDER-23281VX7I19377
     </div>
+  </div>
 
-    <!-- Main grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 px-6 py-6">
+  <!-- Main content -->
+  <main class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 px-4 sm:px-6 py-6">
 
       <!-- Left column -->
       <div class="flex flex-col gap-5">
@@ -71,14 +110,14 @@
             <span class="text-[#58a6ff]">//</span>
             <h2 class="font-bold text-white tracking-wide text-sm">DÉTAILS_DU_MARCHAND</h2>
           </div>
-          <div class="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
             <div>
               <div class="text-gray-500 tag mb-1">nom_marchand</div>
               <div class="text-gray-100">HEC MAROC (600000463)</div>
             </div>
             <div>
               <div class="text-gray-500 tag mb-1">site_web</div>
-              <a href="#" class="text-[#58a6ff]">www.hec-maroc.ma</a>
+              <a href="#" class="text-[#58a6ff] break-all">www.hec-maroc.ma</a>
             </div>
             <div>
               <div class="text-gray-500 tag mb-1">adresse</div>
@@ -86,9 +125,9 @@
             </div>
             <div>
               <div class="text-gray-500 tag mb-1">email</div>
-              <a href="#" class="text-[#58a6ff]">contact@hec-maroc.ma</a>
+              <a href="#" class="text-[#58a6ff] break-all">contact@hec-maroc.ma</a>
             </div>
-            <div></div>
+            <div class="hidden sm:block"></div>
             <div>
               <div class="text-gray-500 tag mb-1">telephone</div>
               <div class="text-gray-100">+212 5 37 56 98 76</div>
@@ -102,10 +141,10 @@
             <span class="text-[#58a6ff]">//</span>
             <h2 class="font-bold text-white tracking-wide text-sm">DÉTAILS_DE_LA_COMMANDE</h2>
           </div>
-          <div class="tag text-gray-500 mb-4">id: ORDER-23281VX7I19377</div>
+          <div class="tag text-gray-500 mb-4 break-all">id: ORDER-23281VX7I19377</div>
 
-          <div class="border border-[#262e3a] rounded overflow-hidden mb-4">
-            <table class="w-full text-sm">
+          <div class="border border-[#262e3a] rounded overflow-x-auto mb-4">
+            <table class="w-full text-sm min-w-[420px]">
               <thead>
                 <tr class="bg-[#161b22] text-gray-500 text-left tag">
                   <th class="px-4 py-2 font-medium">code</th>
@@ -137,7 +176,7 @@
             <span class="text-[#58a6ff]">//</span>
             <h2 class="font-bold text-white tracking-wide text-sm">INFORMATIONS_DU_PAYEUR</h2>
           </div>
-          <div class="grid grid-cols-2 gap-x-6 gap-y-4 text-sm">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm">
             <div>
               <div class="text-gray-500 tag mb-1">nom</div>
               <div class="text-gray-100">KONKA Koami Joseph</div>
@@ -152,7 +191,7 @@
             </div>
             <div>
               <div class="text-gray-500 tag mb-1">email</div>
-              <div class="text-[#58a6ff]">contact@josephkonka.com</div>
+              <div class="text-[#58a6ff] break-all">contact@josephkonka.com</div>
             </div>
           </div>
         </div>
@@ -180,7 +219,7 @@
 
           <!-- Carte bancaire (selected) -->
           <div class="border border-[#58a6ff] bg-[#1f6feb0d] rounded p-5 mb-3">
-            <label class="flex items-center justify-between cursor-pointer mb-5">
+            <label class="flex flex-wrap items-center justify-between gap-2 cursor-pointer mb-5">
               <span class="flex items-center gap-3">
                 <input type="radio" name="payment" checked class="w-4 h-4">
                 <span class="font-semibold text-white">carte_bancaire</span>
@@ -228,7 +267,7 @@
           </div>
 
           <!-- Other payment options -->
-          <label class="flex items-center justify-between border border-[#262e3a] rounded p-4 mb-3 cursor-pointer hover:border-gray-600">
+          <label class="flex flex-wrap items-center justify-between gap-2 border border-[#262e3a] rounded p-4 mb-3 cursor-pointer hover:border-gray-600">
             <span class="flex items-center gap-3">
               <input type="radio" name="payment" class="w-4 h-4">
               <span class="font-semibold text-gray-100">mobile_money</span>
@@ -271,7 +310,7 @@
           </label>
 
           <label class="flex items-start gap-2 mb-5 cursor-pointer">
-            <input type="checkbox" checked class="w-4 h-4 mt-0.5">
+            <input type="checkbox" checked class="w-4 h-4 mt-0.5 flex-shrink-0">
             <span class="text-sm text-gray-400">
               j'ai_lu_et_j'accepte les <a href="#" class="text-[#58a6ff]">conditions_d'utilisation</a> et la <a href="#" class="text-[#58a6ff]">politique_de_confidentialite</a>.
             </span>
@@ -296,11 +335,11 @@
       </div>
     </div>
 
-    <!-- Footer -->
-    <div class="border-t border-[#262e3a] px-8 py-6 bg-[#0d1117]">
+    <!-- Trust strip -->
+    <div class="border-t border-[#262e3a] px-4 sm:px-6 py-8">
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm">
         <div class="flex items-center gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
           </svg>
           <div>
@@ -309,7 +348,7 @@
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
           </svg>
           <div>
@@ -318,7 +357,7 @@
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a5 5 0 010-7.072m0 0L5.636 5.636m0 12.728a9 9 0 010-12.728m0 0L2.808 2.808"/>
           </svg>
           <div>
@@ -327,7 +366,7 @@
           </div>
         </div>
         <div class="flex items-center gap-3">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
           </svg>
           <div>
@@ -337,8 +376,56 @@
         </div>
       </div>
     </div>
+  </main>
 
-  </div>
+  <!-- Footer -->
+  <footer class="border-t border-[#262e3a]">
+    <div class="max-w-6xl mx-auto px-6 py-14 grid sm:grid-cols-2 lg:grid-cols-5 gap-10 text-sm">
+      <div>
+        <div class="flex items-center gap-2 mb-4">
+          <div class="bg-[#1f6feb] rounded w-6 h-6 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+          </div>
+          <span class="font-bold text-white">PayLink_</span>
+        </div>
+        <p class="text-gray-600 tag leading-relaxed">© 2026 PayLink Payments.<br>Tous droits réservés.</p>
+      </div>
+      <div>
+        <div class="text-gray-500 tag mb-4">PRODUITS</div>
+        <ul class="space-y-2 text-gray-400">
+          <li><a href="#" class="hover:text-white">encaisser</a></li>
+          <li><a href="#" class="hover:text-white">liens_de_paiement</a></li>
+          <li><a href="#" class="hover:text-white">factures</a></li>
+          <li><a href="#" class="hover:text-white">abonnements</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-gray-500 tag mb-4">RESSOURCES</div>
+        <ul class="space-y-2 text-gray-400">
+          <li><a href="#" class="hover:text-white">tarifs</a></li>
+          <li><a href="#" class="hover:text-white">support</a></li>
+          <li><a href="#" class="hover:text-white">blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-gray-500 tag mb-4">DÉVELOPPEURS</div>
+        <ul class="space-y-2 text-gray-400">
+          <li><a href="#" class="hover:text-white">documentation_api</a></li>
+          <li><a href="#" class="hover:text-white">statut_api</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-gray-500 tag mb-4">ENTREPRISE</div>
+        <ul class="space-y-2 text-gray-400">
+          <li><a href="#" class="hover:text-white">à_propos</a></li>
+          <li><a href="#" class="hover:text-white">carrières</a></li>
+          <li><a href="#" class="hover:text-white">contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
