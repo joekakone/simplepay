@@ -43,20 +43,59 @@
       </nav>
       <div class="flex items-center gap-3">
         <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors hidden sm:block">connexion</a>
-        <a href="#" class="text-sm bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-semibold rounded px-4 py-2 transition-colors">commencer →</a>
+        <a href="#" class="text-sm bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-semibold rounded px-4 py-2 transition-colors hidden sm:inline-block">commencer →</a>
+        <!-- mobile menu button -->
+        <button id="menu-btn" onclick="toggleMenu()" class="md:hidden w-9 h-9 flex items-center justify-center border border-[#262e3a] rounded text-gray-300" aria-label="Ouvrir le menu" aria-expanded="false">
+          <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile menu panel -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-[#262e3a] bg-[#0d1117] px-6 py-5">
+      <nav class="flex flex-col gap-1 text-sm">
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">entreprise</a>
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">pme</a>
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">créateurs</a>
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">développeurs</a>
+        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">tarifs</a>
+      </nav>
+      <div class="border-t border-[#262e3a] mt-4 pt-4 flex flex-col gap-3">
+        <a href="#" class="text-gray-400 hover:text-white text-sm px-3">connexion</a>
+        <a href="#" class="bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-semibold rounded px-4 py-2.5 text-sm text-center transition-colors">commencer →</a>
       </div>
     </div>
   </header>
 
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('menu-btn');
+      const iconOpen = document.getElementById('icon-open');
+      const iconClose = document.getElementById('icon-close');
+      const isHidden = menu.classList.contains('hidden');
+
+      menu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    }
+  </script>
+
   <!-- Hero -->
   <section class="grid-bg border-b border-[#262e3a]">
-    <div class="max-w-6xl mx-auto px-6 pt-20 pb-24 grid lg:grid-cols-2 gap-12 items-center">
+    <div class="max-w-6xl mx-auto px-6 pt-12 pb-16 sm:pt-20 sm:pb-24 grid lg:grid-cols-2 gap-12 items-center">
       <div>
         <div class="inline-flex items-center gap-2 border border-[#262e3a] rounded-full px-3 py-1 tag text-gray-500 mb-6">
           <span class="w-1.5 h-1.5 rounded-full bg-[#3fb950]"></span>
           status: opérationnel — v2.4.1
         </div>
-        <h1 class="text-5xl sm:text-6xl font-extrabold text-white leading-[1.05] mb-6">
+        <h1 class="text-4xl sm:text-6xl font-extrabold text-white leading-[1.05] mb-6">
           Encaissez<br>
           <span class="text-[#58a6ff]">partout.</span><br>
           <span class="text-gray-600">sans_site_web();</span>
@@ -90,9 +129,9 @@
           <div class="text-gray-300">✓ devise: <span class="text-[#58a6ff]">MAD</span></div>
           <div class="text-gray-300">✓ méthodes: <span class="text-[#58a6ff]">carte, mobile_money, virement</span></div>
           <div class="mt-3 text-[#3fb950]">✓ lien généré en 340ms</div>
-          <div class="mt-3 border border-[#262e3a] rounded px-3 py-2 text-[#58a6ff] flex items-center justify-between">
-            <span>paylink.ma/pay/ORDER-23281VX7I19377</span>
-            <span class="text-gray-600 tag">copier</span>
+          <div class="mt-3 border border-[#262e3a] rounded px-3 py-2 text-[#58a6ff] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+            <span class="break-all">paylink.ma/pay/ORDER-23281VX7I19377</span>
+            <span class="text-gray-600 tag flex-shrink-0">copier</span>
           </div>
           <div class="mt-4 text-gray-600 blink">_</div>
         </div>
@@ -102,7 +141,7 @@
 
   <!-- How it works -->
   <section class="border-b border-[#262e3a] bg-[#0d1117]">
-    <div class="max-w-6xl mx-auto px-6 py-24">
+    <div class="max-w-6xl mx-auto px-6 py-14 sm:py-24">
       <div class="tag text-gray-500 mb-3">// comment_ça_marche</div>
       <h2 class="text-3xl sm:text-4xl font-bold text-white mb-16 max-w-xl">
         Encaissez en minutes, sans une seule ligne de code.
@@ -161,7 +200,7 @@
 
   <!-- Statement -->
   <section class="border-b border-[#262e3a]">
-    <div class="max-w-4xl mx-auto px-6 py-24 text-center">
+    <div class="max-w-4xl mx-auto px-6 py-14 sm:py-24 text-center">
       <div class="tag text-gray-500 mb-6">// pour_qui</div>
       <p class="text-2xl sm:text-3xl text-gray-300 leading-relaxed">
         Freelance, créateur, petite structure —
@@ -173,7 +212,7 @@
 
   <!-- Security -->
   <section class="border-b border-[#262e3a] bg-[#0d1117]">
-    <div class="max-w-6xl mx-auto px-6 py-24">
+    <div class="max-w-6xl mx-auto px-6 py-14 sm:py-24">
       <div class="tag text-gray-500 mb-3">// sécurité</div>
       <h2 class="text-3xl font-bold text-white mb-4">Conformité et sécurité garanties</h2>
       <p class="text-gray-500 text-sm max-w-xl mb-12">Chaque transaction sur la plateforme respecte les standards les plus stricts du secteur.</p>
