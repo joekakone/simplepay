@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PayLink — Créer un lien de paiement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  * { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  body { background: #0d1117; }
+  input::placeholder, textarea::placeholder { color: #6b7280; }
+  .tag { font-size: 11px; letter-spacing: 0.06em; }
+  ::selection { background: #2f6feb44; }
+  input[type="radio"], input[type="checkbox"] { accent-color: #58a6ff; }
+  .blink { animation: blink 1.1s steps(2, start) infinite; }
+  @keyframes blink { to { visibility: hidden; } }
+</style>
+</head>
+<body class="text-gray-200 min-h-screen">
+
+  <!-- Nav -->
+  <header class="border-b border-[#262e3a] sticky top-0 bg-[#0d1117]/90 backdrop-blur z-20">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+      <div class="flex items-center gap-2">
+        <a href="index.html" class="flex items-center gap-2">
+          <div class="bg-[#1f6feb] rounded w-8 h-8 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+            <!-- <img src="static/img/simplepay-logo.svg" alt="PayLink" class="w-4 h-4 text-white"> -->
+          </div>
+          <span class="font-bold text-white text-sm">PayLink<span class="text-[#58a6ff]">_</span></span>
+        </a>
+      </div>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-gray-400">
+        <a href="enterprise.html" class="hover:text-white transition-colors">entreprise</a>
+        <a href="sme.html" class="hover:text-white transition-colors">pme</a>
+        <a href="creators.html" class="hover:text-white transition-colors">créateurs</a>
+        <a href="developers.html" class="hover:text-white transition-colors">développeurs</a>
+        <a href="pricing.html" class="hover:text-white transition-colors">tarifs</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <span class="hidden sm:flex items-center gap-2 text-[#3fb950] text-xs border border-[#1f6feb44] bg-[#1f6feb0d] rounded-full px-3 py-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#3fb950]"></span>
+          brouillon_enregistré
+        </span>
+        <div class="w-8 h-8 rounded-full bg-[#1f6feb] flex items-center justify-center text-white text-xs font-bold">KJ</div>
+      </div>
+    </div>
+
+    <!-- mobile menu panel -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-[#262e3a] bg-[#0d1117] px-6 py-5">
+      <nav class="flex flex-col gap-1 text-sm">
+        <a href="enterprise.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">entreprise</a>
+        <a href="sme.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">pme</a>
+        <a href="creators.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">créateurs</a>
+        <a href="developers.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">développeurs</a>
+        <a href="pricing.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">tarifs</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <span class="hidden sm:flex items-center gap-2 text-[#3fb950] text-xs border border-[#1f6feb44] bg-[#1f6feb0d] rounded-full px-3 py-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#3fb950]"></span>
+          brouillon_enregistré
+        </span>
+        <div class="w-8 h-8 rounded-full bg-[#1f6feb] flex items-center justify-center text-white text-xs font-bold">KJ</div>
+      </div>
+    </div>
+  </header>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('menu-btn');
+      const iconOpen = document.getElementById('icon-open');
+      const iconClose = document.getElementById('icon-close');
+      const isHidden = menu.classList.contains('hidden');
+
+      menu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    }
+  </script>
+
+  <!-- App header -->
+  <header class="bg-[#0d1117]/90 backdrop-blur z-20">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+      <div class="flex items-center gap-4">
+        <div class="hidden sm:flex items-center gap-2 text-sm text-gray-500">
+          <a href="#" class="hover:text-white transition-colors">tableau_de_bord</a>
+          <span class="text-gray-700">/</span>
+          <span class="text-gray-200">nouveau_lien</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+
+    <div class="mb-8">
+      <div class="tag text-gray-500 mb-2">$ paylink create --new</div>
+      <h1 class="text-2xl sm:text-3xl font-bold text-white">créer_un_lien_de_paiement</h1>
+    </div>
+
+    <div class="grid lg:grid-cols-[1fr_380px] gap-6 items-start">
+
+      <!-- Form -->
+      <form id="link-form" class="flex flex-col gap-6">
+
+        <!-- Step 1: type -->
+        <div class="border border-[#262e3a] rounded-lg p-5 sm:p-6">
+          <div class="flex items-center gap-2 mb-5">
+            <span class="text-[#58a6ff]">01</span>
+            <h2 class="font-bold text-white tracking-wide text-sm">TYPE_DE_LIEN</h2>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <label class="link-type cursor-pointer border border-[#58a6ff] bg-[#1f6feb0d] rounded p-4 relative block">
+              <input type="radio" name="link_type" value="charge" checked class="absolute top-3 right-3 w-4 h-4">
+              <div class="text-2xl mb-3">⚡</div>
+              <div class="font-semibold text-white text-sm mb-1">paiement_unique</div>
+              <div class="text-gray-500 text-xs leading-relaxed">Une charge fixe pour un produit ou service ponctuel.</div>
+            </label>
+            <label class="link-type cursor-pointer border border-[#262e3a] rounded p-4 relative block">
+              <input type="radio" name="link_type" value="subscription" class="absolute top-3 right-3 w-4 h-4">
+              <div class="text-2xl mb-3">↻</div>
+              <div class="font-semibold text-gray-300 text-sm mb-1">abonnement</div>
+              <div class="text-gray-500 text-xs leading-relaxed">Paiements récurrents, cycle de facturation configurable.</div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Step 2: details -->
+        <div class="border border-[#262e3a] rounded-lg p-5 sm:p-6">
+          <div class="flex items-center gap-2 mb-5">
+            <span class="text-[#58a6ff]">02</span>
+            <h2 class="font-bold text-white tracking-wide text-sm">DÉTAILS_DU_PRODUIT</h2>
+          </div>
+
+          <div class="space-y-5">
+            <div>
+              <label class="block tag text-gray-500 mb-1">nom_du_produit</label>
+              <input id="in-name" type="text" placeholder="Frais de dossier" class="w-full bg-[#0d1117] border border-[#262e3a] rounded px-4 py-2.5 text-sm text-gray-100 focus:outline-none focus:border-[#58a6ff]">
+            </div>
+
+            <div>
+              <label class="block tag text-gray-500 mb-1">description <span class="text-gray-600">(optionnel)</span></label>
+              <textarea id="in-desc" rows="2" placeholder="Programme Grande Ecole" class="w-full bg-[#0d1117] border border-[#262e3a] rounded px-4 py-2.5 text-sm text-gray-100 focus:outline-none focus:border-[#58a6ff] resize-none"></textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block tag text-gray-500 mb-1">montant</label>
+                <input id="in-amount" type="number" min="0" step="0.01" placeholder="300.00" class="w-full bg-[#0d1117] border border-[#262e3a] rounded px-4 py-2.5 text-sm text-gray-100 focus:outline-none focus:border-[#58a6ff]">
+              </div>
+              <div>
+                <label class="block tag text-gray-500 mb-1">devise</label>
+                <select id="in-currency" class="w-full bg-[#0d1117] border border-[#262e3a] rounded px-4 py-2.5 text-sm text-gray-100 focus:outline-none focus:border-[#58a6ff]">
+                  <option>MAD</option>
+                  <option>XOF</option>
+                  <option>EUR</option>
+                  <option>USD</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="cycle-field" class="hidden">
+              <label class="block tag text-gray-500 mb-1">cycle_de_facturation</label>
+              <select id="in-cycle" class="w-full bg-[#0d1117] border border-[#262e3a] rounded px-4 py-2.5 text-sm text-gray-100 focus:outline-none focus:border-[#58a6ff]">
+                <option>mensuel</option>
+                <option>trimestriel</option>
+                <option>annuel</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: methods -->
+        <div class="border border-[#262e3a] rounded-lg p-5 sm:p-6">
+          <div class="flex items-center gap-2 mb-5">
+            <span class="text-[#58a6ff]">03</span>
+            <h2 class="font-bold text-white tracking-wide text-sm">MÉTHODES_DE_PAIEMENT</h2>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-3">
+            <label class="flex items-center gap-3 border border-[#262e3a] rounded p-3 cursor-pointer hover:border-gray-600">
+              <input type="checkbox" checked class="method-cb w-4 h-4" data-label="carte">
+              <span class="text-sm text-gray-200">carte_bancaire</span>
+            </label>
+            <label class="flex items-center gap-3 border border-[#262e3a] rounded p-3 cursor-pointer hover:border-gray-600">
+              <input type="checkbox" checked class="method-cb w-4 h-4" data-label="mobile_money">
+              <span class="text-sm text-gray-200">mobile_money</span>
+            </label>
+            <label class="flex items-center gap-3 border border-[#262e3a] rounded p-3 cursor-pointer hover:border-gray-600">
+              <input type="checkbox" class="method-cb w-4 h-4" data-label="virement">
+              <span class="text-sm text-gray-200">virement_bancaire</span>
+            </label>
+            <label class="flex items-center gap-3 border border-[#262e3a] rounded p-3 cursor-pointer hover:border-gray-600">
+              <input type="checkbox" class="method-cb w-4 h-4" data-label="paypal">
+              <span class="text-sm text-gray-200">paypal</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button type="button" onclick="generateLink()" class="bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-bold rounded px-6 py-3 transition-colors">
+            générer_le_lien →
+          </button>
+          <span class="text-gray-600 tag">ou enregistrer comme brouillon</span>
+        </div>
+      </form>
+
+      <!-- Live preview -->
+      <div class="lg:sticky lg:top-24">
+        <div class="rounded-lg border border-[#262e3a] bg-[#11161d] overflow-hidden">
+          <div class="flex items-center gap-1.5 px-4 py-3 border-b border-[#262e3a]">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
+            <span class="text-gray-600 tag ml-3">aperçu</span>
+          </div>
+          <div class="p-6 text-sm leading-7">
+            <div class="text-gray-500">$ paylink preview</div>
+            <div class="text-gray-300">✓ type: <span id="pv-type" class="text-[#58a6ff]">paiement_unique</span></div>
+            <div class="text-gray-300">✓ nom_produit: <span id="pv-name" class="text-[#58a6ff]">—</span></div>
+            <div class="text-gray-300">✓ montant: <span id="pv-amount" class="text-[#58a6ff]">0.00</span> <span id="pv-currency" class="text-gray-600">MAD</span></div>
+            <div class="text-gray-300">✓ méthodes: <span id="pv-methods" class="text-[#58a6ff]">carte, mobile_money</span></div>
+
+            <div id="pv-result" class="hidden">
+              <div class="mt-4 text-[#3fb950]">✓ lien généré en 340ms</div>
+              <div class="mt-3 border border-[#262e3a] rounded px-3 py-2 text-[#58a6ff] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                <span id="pv-url" class="break-all">paylink.ma/pay/ORDER-XXXXXXXXXX</span>
+                <button type="button" onclick="copyLink()" id="copy-btn" class="text-gray-600 tag hover:text-[#58a6ff] flex-shrink-0 text-left">copier</button>
+              </div>
+            </div>
+
+            <div id="pv-empty" class="mt-4 text-gray-600 blink">_</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const nameInput = document.getElementById('in-name');
+    const descInput = document.getElementById('in-desc');
+    const amountInput = document.getElementById('in-amount');
+    const currencySelect = document.getElementById('in-currency');
+    const cycleField = document.getElementById('cycle-field');
+    const methodCbs = document.querySelectorAll('.method-cb');
+    const typeRadios = document.querySelectorAll('input[name="link_type"]');
+    const linkTypeLabels = document.querySelectorAll('.link-type');
+
+    function updatePreview() {
+      document.getElementById('pv-name').textContent = nameInput.value.trim() || '—';
+      const amt = parseFloat(amountInput.value);
+      document.getElementById('pv-amount').textContent = isNaN(amt) ? '0.00' : amt.toFixed(2);
+      document.getElementById('pv-currency').textContent = currencySelect.value;
+
+      const checkedMethods = Array.from(methodCbs).filter(cb => cb.checked).map(cb => cb.dataset.label);
+      document.getElementById('pv-methods').textContent = checkedMethods.length ? checkedMethods.join(', ') : 'aucune';
+
+      const type = document.querySelector('input[name="link_type"]:checked').value;
+      document.getElementById('pv-type').textContent = type === 'charge' ? 'paiement_unique' : 'abonnement';
+      cycleField.classList.toggle('hidden', type !== 'subscription');
+    }
+
+    [nameInput, descInput, amountInput, currencySelect].forEach(el => el.addEventListener('input', updatePreview));
+    methodCbs.forEach(cb => cb.addEventListener('change', updatePreview));
+
+    typeRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        linkTypeLabels.forEach(label => {
+          const isChecked = label.querySelector('input').checked;
+          label.classList.toggle('border-[#58a6ff]', isChecked);
+          label.classList.toggle('bg-[#1f6feb0d]', isChecked);
+          label.classList.toggle('border-[#262e3a]', !isChecked);
+          label.querySelector('.font-semibold').classList.toggle('text-white', isChecked);
+          label.querySelector('.font-semibold').classList.toggle('text-gray-300', !isChecked);
+        });
+        updatePreview();
+      });
+    });
+
+    function generateLink() {
+      updatePreview();
+      const rand = Math.random().toString(36).substring(2, 12).toUpperCase();
+      document.getElementById('pv-url').textContent = 'paylink.ma/pay/ORDER-' + rand;
+      document.getElementById('pv-result').classList.remove('hidden');
+      document.getElementById('pv-empty').classList.add('hidden');
+    }
+
+    function copyLink() {
+      const url = document.getElementById('pv-url').textContent;
+      navigator.clipboard.writeText(url).then(() => {
+        const btn = document.getElementById('copy-btn');
+        const original = btn.textContent;
+        btn.textContent = 'copié ✓';
+        setTimeout(() => { btn.textContent = original; }, 1500);
+      });
+    }
+
+    updatePreview();
+  </script>
+
+</body>
+</html>

@@ -6,6 +6,8 @@
 <title>PayLink — Encaissez partout, sans code</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Favicon-->
+<link rel="shortcut icon" href="static/img/favicon.svg">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   * { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
@@ -28,23 +30,26 @@
   <header class="border-b border-[#262e3a] sticky top-0 bg-[#0d1117]/90 backdrop-blur z-20">
     <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
       <div class="flex items-center gap-2">
-        <div class="bg-[#1f6feb] rounded w-8 h-8 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
-          </svg>
-        </div>
-        <span class="font-bold text-white text-sm">PayLink<span class="text-[#58a6ff]">_</span></span>
+        <a href="index.html" class="flex items-center gap-2">
+          <div class="bg-[#1f6feb] rounded w-8 h-8 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+            <!-- <img src="static/img/simplepay-logo.svg" alt="PayLink" class="w-4 h-4 text-white"> -->
+          </div>
+          <span class="font-bold text-white text-sm">PayLink<span class="text-[#58a6ff]">_</span></span>
+        </a>
       </div>
       <nav class="hidden md:flex items-center gap-8 text-sm text-gray-400">
-        <a href="#" class="hover:text-white transition-colors">entreprise</a>
-        <a href="#" class="hover:text-white transition-colors">pme</a>
-        <a href="#" class="hover:text-white transition-colors">créateurs</a>
-        <a href="#" class="hover:text-white transition-colors">développeurs</a>
-        <a href="#" class="hover:text-white transition-colors">tarifs</a>
+        <a href="enterprise.html" class="hover:text-white transition-colors">entreprise</a>
+        <a href="sme.html" class="hover:text-white transition-colors">pme</a>
+        <a href="creators.html" class="hover:text-white transition-colors">créateurs</a>
+        <a href="developers.html" class="hover:text-white transition-colors">développeurs</a>
+        <a href="pricing.html" class="hover:text-white transition-colors">tarifs</a>
       </nav>
       <div class="flex items-center gap-3">
-        <a href="#" class="text-sm text-gray-400 hover:text-white transition-colors hidden sm:block">connexion</a>
-        <a href="#" class="text-sm bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-semibold rounded px-4 py-2 transition-colors hidden sm:inline-block">commencer →</a>
+        <a href="login.html" class="text-sm text-gray-400 hover:text-white transition-colors hidden sm:block">connexion</a>
+        <a href="create-link.html" class="text-sm bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-semibold rounded px-4 py-2 transition-colors hidden sm:inline-block">commencer →</a>
         <!-- mobile menu button -->
         <button id="menu-btn" onclick="toggleMenu()" class="md:hidden w-9 h-9 flex items-center justify-center border border-[#262e3a] rounded text-gray-300" aria-label="Ouvrir le menu" aria-expanded="false">
           <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -60,15 +65,15 @@
     <!-- mobile menu panel -->
     <div id="mobile-menu" class="md:hidden hidden border-t border-[#262e3a] bg-[#0d1117] px-6 py-5">
       <nav class="flex flex-col gap-1 text-sm">
-        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">entreprise</a>
-        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">pme</a>
-        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">créateurs</a>
-        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">développeurs</a>
-        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">tarifs</a>
+        <a href="enterprise.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">entreprise</a>
+        <a href="sme.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">pme</a>
+        <a href="creators.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">créateurs</a>
+        <a href="developers.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">développeurs</a>
+        <a href="pricing.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">tarifs</a>
       </nav>
       <div class="border-t border-[#262e3a] mt-4 pt-4 flex flex-col gap-3">
-        <a href="#" class="text-gray-400 hover:text-white text-sm px-3">connexion</a>
-        <a href="#" class="bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-semibold rounded px-4 py-2.5 text-sm text-center transition-colors">commencer →</a>
+        <a href="login.html" class="text-gray-400 hover:text-white text-sm px-3">connexion</a>
+        <a href="create-link.html" class="bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-semibold rounded px-4 py-2.5 text-sm text-center transition-colors">commencer →</a>
       </div>
     </div>
   </header>
@@ -106,10 +111,10 @@
           <span class="text-gray-200">Zéro ligne de code.</span> Zéro friction.
         </p>
         <div class="flex items-center gap-4">
-          <a href="#" class="bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-bold rounded px-6 py-3 transition-colors">
+          <a href="create-link.html" class="bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-bold rounded px-6 py-3 transition-colors">
             créer_un_lien →
           </a>
-          <a href="#" class="text-gray-400 hover:text-white transition-colors text-sm border-b border-dashed border-gray-700">
+          <a href="#" class="bg-white text-[#0d1117] hover:bg-gray-200 text-white font-bold rounded px-6 py-3 transition-colors">
             voir_la_démo
           </a>
         </div>
@@ -171,7 +176,7 @@
               <p class="text-gray-500 text-sm leading-relaxed">Partagez le lien, recevez la confirmation instantanément, suivez tout depuis votre tableau de bord.</p>
             </div>
           </div>
-          <a href="#" class="inline-block mt-4 bg-white text-[#0d1117] font-bold rounded px-6 py-3 hover:bg-gray-200 transition-colors">
+          <a href="register.html" class="inline-block mt-4 bg-white text-[#0d1117] font-bold rounded px-6 py-3 hover:bg-gray-200 transition-colors">
             commencer_gratuitement
           </a>
         </div>
@@ -191,9 +196,9 @@
               <div class="text-gray-500 text-xs leading-relaxed">Paiements récurrents, cycle configurable.</div>
             </div>
           </div>
-          <button class="w-full bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-bold rounded py-3 transition-colors">
+          <a href="create-link.html" class="inline-block text-center w-full bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-bold rounded px-6 py-3 transition-colors">
             générer_le_lien →
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -241,7 +246,7 @@
         <h2 class="text-3xl font-bold text-white mb-3">Prêt à encaisser ?</h2>
         <p class="text-gray-500 max-w-md">Créez votre compte et commencez à accepter des paiements dès aujourd'hui, sans engagement.</p>
       </div>
-      <a href="#" class="bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-bold rounded px-8 py-4 whitespace-nowrap transition-colors">
+      <a href="register.html" class="bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-bold rounded px-8 py-4 whitespace-nowrap transition-colors">
         créer_mon_compte →
       </a>
     </div>

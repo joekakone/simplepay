@@ -22,27 +22,26 @@
   <header class="border-b border-[#262e3a] sticky top-0 bg-[#0d1117]/90 backdrop-blur z-20">
     <div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
       <div class="flex items-center gap-2">
-        <div class="bg-[#1f6feb] rounded w-8 h-8 flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
-          </svg>
-        </div>
-        <span class="font-bold text-white text-sm">PayLink<span class="text-[#58a6ff]">_</span></span>
+        <a href="index.html" class="flex items-center gap-2">
+          <div class="bg-[#1f6feb] rounded w-8 h-8 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+            <!-- <img src="static/img/simplepay-logo.svg" alt="PayLink" class="w-4 h-4 text-white"> -->
+          </div>
+          <span class="font-bold text-white text-sm">PayLink<span class="text-[#58a6ff]">_</span></span>
+        </a>
       </div>
       <nav class="hidden md:flex items-center gap-8 text-sm text-gray-400">
-        <a href="#" class="hover:text-white transition-colors">entreprise</a>
-        <a href="#" class="hover:text-white transition-colors">pme</a>
-        <a href="#" class="hover:text-white transition-colors">créateurs</a>
-        <a href="#" class="hover:text-white transition-colors">développeurs</a>
-        <a href="#" class="hover:text-white transition-colors">tarifs</a>
+        <a href="enterprise.html" class="hover:text-white transition-colors">entreprise</a>
+        <a href="sme.html" class="hover:text-white transition-colors">pme</a>
+        <a href="creators.html" class="hover:text-white transition-colors">créateurs</a>
+        <a href="developers.html" class="hover:text-white transition-colors">développeurs</a>
+        <a href="pricing.html" class="hover:text-white transition-colors">tarifs</a>
       </nav>
       <div class="flex items-center gap-3">
-        <div class="hidden sm:flex items-center gap-2 text-[#3fb950] text-xs border border-[#1f6feb44] bg-[#1f6feb0d] rounded-full px-3 py-1.5">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 1a5 5 0 00-5 5v2H4a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm3 7V6a3 3 0 10-6 0v2h6z" clip-rule="evenodd"/>
-          </svg>
-          paiement_sécurisé
-        </div>
+        <a href="login.html" class="text-sm text-gray-400 hover:text-white transition-colors hidden sm:block">connexion</a>
+        <a href="create-link.html" class="text-sm bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-semibold rounded px-4 py-2 transition-colors hidden sm:inline-block">commencer →</a>
         <!-- mobile menu button -->
         <button id="menu-btn" onclick="toggleMenu()" class="md:hidden w-9 h-9 flex items-center justify-center border border-[#262e3a] rounded text-gray-300" aria-label="Ouvrir le menu" aria-expanded="false">
           <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -58,17 +57,15 @@
     <!-- mobile menu panel -->
     <div id="mobile-menu" class="md:hidden hidden border-t border-[#262e3a] bg-[#0d1117] px-6 py-5">
       <nav class="flex flex-col gap-1 text-sm">
-        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">entreprise</a>
-        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">pme</a>
-        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">créateurs</a>
-        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">développeurs</a>
-        <a href="#" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">tarifs</a>
+        <a href="enterprise.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">entreprise</a>
+        <a href="sme.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">pme</a>
+        <a href="creators.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">créateurs</a>
+        <a href="developers.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">développeurs</a>
+        <a href="pricing.html" class="text-gray-300 hover:text-white hover:bg-[#161b22] rounded px-3 py-2.5 transition-colors">tarifs</a>
       </nav>
-      <div class="border-t border-[#262e3a] mt-4 pt-4 flex items-center gap-2 text-[#3fb950] text-xs px-3">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M10 1a5 5 0 00-5 5v2H4a2 2 0 00-2 2v7a2 2 0 002 2h12a2 2 0 002-2v-7a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm3 7V6a3 3 0 10-6 0v2h6z" clip-rule="evenodd"/>
-        </svg>
-        paiement_sécurisé
+      <div class="border-t border-[#262e3a] mt-4 pt-4 flex flex-col gap-3">
+        <a href="login.html" class="text-gray-400 hover:text-white text-sm px-3">connexion</a>
+        <a href="create-link.html" class="bg-[#1f6feb] hover:bg-[#3b82f6] text-white font-semibold rounded px-4 py-2.5 text-sm text-center transition-colors">commencer →</a>
       </div>
     </div>
   </header>
